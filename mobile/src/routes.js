@@ -15,13 +15,14 @@ const Routes = createAppContainer(
         Profile: {
             screen: Profile,
             navigationOptions: {
-                title:'Sign Up by GitHub'
+                title:"GitHub's Profile"
             }
         },
     },{
         defaultNavigationOptions: {
             headerTitleAlign: 'center',
             headerTintColor: '#FFF',
+            headerBackTitleVisible: false,
             headerStyle: {
                 backgroundColor: '#ec5353'
             },

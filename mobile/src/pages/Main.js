@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, View, Text } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 
-function Main() {
+function Main({ navigation }) {
     const [ currentRegion, setCurrentRegion ] = useState(null);
 
     useEffect(() => {
@@ -36,6 +36,15 @@ function Main() {
     <MapView initialRegion={currentRegion} style={ styles.map }>
         <Marker coordinate={ { latitude: 53.3223839, longitude: -6.2474962 }}>
             <Image style={styles.avatar} source={{ uri: 'https://avatars3.githubusercontent.com/u/43343496?s=460&v=4'}}/>
+            <Callout onPress={()=>{
+                navigation.navigate('Profile', { github_username: 'Daniel-Simoes'});
+            }}>
+                 <View style={styles.callout}>
+                    <Text style={styles.userName}>Daniel Simões</Text>
+                    <Text style={styles.userBio}>Apaixonado por NodeJS, ReactJS e React Native.</Text>
+                    <Text style={styles.userTechs}>NodeJS, ReactJS e React Native.</Text>
+                 </View>
+            </Callout>
         </Marker>
     </MapView>
     );
@@ -51,6 +60,20 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         borderWidth: 1,
         borderColor:'#ec5353',
+    },
+    callout: {
+        width: 260,
+    },
+    userName: {
+        fontWeight: 'bold',
+        fontSize: 16
+    },
+    userBio: {
+        color: '#666',
+        marginTop: 5,
+    },
+    userTechs: {
+        marginTop: 5,
     },
 })
 
