@@ -4,8 +4,12 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import api from '../services/api';
+
 function Main({ navigation }) {
-    const [ currentRegion, setCurrentRegion ] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [currentRegion, setCurrentRegion] = useState(null);
+    const [techs, setTechs] = useState('');
 
     useEffect(() => {
         async function loadInitialPosition() {
@@ -28,6 +32,25 @@ function Main({ navigation }) {
     },
     []);
 
+    async function loadUsers() {
+        const { latitude, longitude } = currentRegion;
+
+        const response = await api.get('/search', {
+            params: {
+                latitude,
+                longitude,
+                techs
+            }
+        });
+        setUsers(response.data.users);
+
+    }
+
+        function handleRegionChanged(region) {
+            console.log(region);
+            setCurrentRegion(region);
+        }
+
     if (!currentRegion) {
         return null;
     }
@@ -35,19 +58,21 @@ function Main({ navigation }) {
 
     return (
         <>
-            <MapView initialRegion={currentRegion} style={styles.map}>
-                <Marker coordinate={ { latitude: 53.3223839, longitude: -6.2474962 }}>
-                    <Image style={styles.avatar} source={{ uri: 'https://avatars3.githubusercontent.com/u/43343496?s=460&v=4'}}/>
+            <MapView onRegionChangeComplete={handleRegionChanged} initialRegion={currentRegion} style={styles.map}>
+                {users.map( user =>(
+                    <Marker key={user._id}coordinate={ { latitude: user.location.coordinates [1], longitude: user.location.coordinates [0] }}>
+                    <Image style={styles.avatar} source={{ uri: user.avatar_url }}/>
                     <Callout onPress={()=>{
-                        navigation.navigate('Profile', { github_username: 'Daniel-Simoes'});
+                        navigation.navigate('Profile', { github_username: user.github_username });
                     }}>
                         <View style={styles.callout}>
-                            <Text style={styles.userName}>Daniel Simões</Text>
-                            <Text style={styles.userBio}>Apaixonado por NodeJS, ReactJS e React Native.</Text>
-                            <Text style={styles.userTechs}>NodeJS, ReactJS e React Native.</Text>
+                            <Text style={styles.userName}>{user.name}</Text>
+                            <Text style={styles.userBio}>{user.bio}</Text>
+                <Text style={styles.userTechs}>{user.techs.join(', ')}</Text>
                         </View>
                     </Callout>
                 </Marker>
+                ))}
             </MapView>
             <View style={styles.searchForm}>
                 <TextInput 
@@ -56,8 +81,10 @@ function Main({ navigation }) {
                 placeholderTextColor="#999"
                 autoCapitalize="words"
                 autoCorrect= {false}
+                value={techs}
+                onChangeText={setTechs}
                 />
-                <TouchableOpacity onPress={() =>{}} style={styles.loadButton}>
+                <TouchableOpacity onPress={loadUsers} style={styles.loadButton}>
                     <MaterialIcons name="my-location" size={20} color="#FFF"/>
                 </TouchableOpacity>
             </View>
@@ -78,6 +105,7 @@ const styles = StyleSheet.create({
     },
     callout: {
         width: 260,
+        
     },
     userName: {
         fontWeight: 'bold',
@@ -92,9 +120,9 @@ const styles = StyleSheet.create({
     },
     searchForm: {
         position: 'absolute',
-        bottom: 30,
-        left: 20,
-        right: 20,
+        top: 20,
+        left: 15,
+        right: 10,
         zIndex: 5,
         flexDirection: 'row',
     },
@@ -121,7 +149,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 15,
+        marginLeft: 10,
         elevation: 20,
     }
 
