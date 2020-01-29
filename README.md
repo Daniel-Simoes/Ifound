@@ -11,11 +11,7 @@
 
 <br>
 
-<p align="center">
-  <img alt="Frontend" src=".github/devradar.png" width="100%">
-</p>
-
-## :iFound: technologies
+## 💻 Technologies
 
 This project was developed with:
 
@@ -24,7 +20,7 @@ This project was developed with:
 - [React Native](https://facebook.github.io/react-native/)
 - [Expo](https://expo.io/)
 
-## 💻 Project
+## 🔖 Project
 
 iFound is a project that connects developers close to you who work with the same technologies.
 
