@@ -34,8 +34,3 @@ iFound is a project that connects developers close to you who work with the same
 
 After the merge of your pull request is done, you can delete your branch.
 
-## :memo: Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
----
