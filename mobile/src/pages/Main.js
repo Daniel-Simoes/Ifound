@@ -5,7 +5,7 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons';
 
 import api from '../services/api';
-import { connect, disconnect } from '../services/socket';
+import { connect, disconnect, subscribeToNewUsers } from '../services/socket';
 
 
 function Main({ navigation }) {
@@ -33,8 +33,13 @@ function Main({ navigation }) {
         loadInitialPosition();
     },
     []);
+ 
+    useEffect(() =>{
+        subscribeToNewUsers(user => setUsers([...users,user]));
+    }, [users]); 
 
     function setupWebsocket() {
+        disconnect();
         const { latitude, longitude } = currentRegion;
         connect(latitude, longitude, techs,);
     }
@@ -55,7 +60,6 @@ function Main({ navigation }) {
     }
 
         function handleRegionChanged(region) {
-            console.log(region);
             setCurrentRegion(region);
         }
 
@@ -76,7 +80,7 @@ function Main({ navigation }) {
                         <View style={styles.callout}>
                             <Text style={styles.userName}>{user.name}</Text>
                             <Text style={styles.userBio}>{user.bio}</Text>
-                <Text style={styles.userTechs}>{user.techs.join(', ')}</Text>
+                            <Text style={styles.userTechs}>{user.techs.join(', ')}</Text>
                         </View>
                     </Callout>
                 </Marker>
