@@ -40,10 +40,12 @@ setGithubUsername('');
   }
 
     return(
+    
+      
         <form onSubmit={handleSubmit}>
        <div className='input-block'>
          <label htmlFor="github_username">Github User</label>
-         <input 
+         <input className="campo"
           name="github_username" 
           id="github_username" required 
           value={github_username}
@@ -87,6 +89,7 @@ setGithubUsername('');
          </div>
          <button type='submit'>Enter</button>
      </form>
+     
     );
 }
 

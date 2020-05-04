@@ -5,8 +5,10 @@ import './App.css'
 import './Sidebar.css'
 import './Main.css'
 
+
 import UserForm from './components/UserForm'
 import UserItem from './components/UserItem';
+import Conteudo from './components/conteudo';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -34,17 +36,22 @@ async function handleAddUser(data){
 
   return (
    <div id="app">
-    <aside>
-     <strong>Sign Up</strong>
-     <UserForm onSubmit={handleAddUser}/>
-     </aside>
+     <div id="divisao">
+      <aside>
+      <strong>Sign Up</strong>
+      <UserForm onSubmit={handleAddUser}/>
+      </aside>
+     </div>
+     <div id="divisao2">
+     <Conteudo/>
       <main>
         <ul>
           {users.map(user => (
             <UserItem key={user._id} user={user} />
           ))}
         </ul>
-      </main>
+      </main>`
+      </div>  
     </div>
   );
 } 

@@ -9,13 +9,33 @@
 
 html, body, #root {
     height: 100%;
+    background: #fff;
 }
 
 body{
-    background: #ffedec;
+    
     -webkit-font-smoothing: antialiased;
+    
 } 
 
 body, input, button {
     font-family: Roboto, sans-serif;
+}
+
+#divisao{
+    display: block;
+    width: 50%;
+    height: 100vh;
+    background-image: url("./assets/images/login.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#divisao2{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    background: #ec535300;
 }

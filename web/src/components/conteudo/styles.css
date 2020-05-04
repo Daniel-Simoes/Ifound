@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+#content {
+  height: 100px;
+  width: auto;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.733);
+  background: #ec535300;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 60px;
+ 
+}
+img{
+  opacity: 0.9;
+  width:180px;
+  height:80px;
+}
