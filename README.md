@@ -22,7 +22,7 @@ Clone the repository
 git clone https://github.com/Daniel-Simoes/Ifound.git
 ```
 
-Open a terminal on the repository and look for Web's folder and install the dependencies:
+Open a terminal on the repository and look for backend's folder and install the dependencies:
 
 ```bash
 yarn install
@@ -31,7 +31,13 @@ yarn install
 To run the Server use:
 
 ```bash
-json-server server.json -p 3333
+yarn dev
+```
+
+Open other window from you terminal and look for Web's folder and install the dependencies:
+
+```bash
+yarn install
 ```
 
 To run the application use:
@@ -56,11 +62,24 @@ Clone the repository
 git clone https://github.com/Daniel-Simoes/Ucoffe.git
 ```
 
-Open a terminal on the repository and look for Mobile's folder and install the dependencies:
+Open a terminal on the repository and look for backend's folder and install the dependencies:
 
 ```bash
 yarn install
 ```
+
+To run the Server use:
+
+```bash
+yarn dev
+```
+
+Open other window from you terminal and look for Mobile's folder and install the dependencies:
+
+```bash
+yarn install
+```
+
 If you do not have the EXPO in your machine, run:
 
 ```bash
